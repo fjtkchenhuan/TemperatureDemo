@@ -1,0 +1,2 @@
+include ':app', ':serialport', ':imlx90640', ':temperaturelib', ':mlx90621', ':amg88xx', ':omron'
+rootProject.name='TemperatureDemo'

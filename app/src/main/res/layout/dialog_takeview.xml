@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ListView
+        android:id="@+id/temp_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/black"></ListView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/holo_red_light"
+        ></View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自定义:"></TextView>
+
+        <EditText
+            android:id="@+id/temp_edit_take"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="补偿值(℃)"
+            android:inputType="numberSigned|numberDecimal"></EditText>
+
+        <EditText
+            android:id="@+id/temp_edit_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="距离(cm)"
+            android:visibility="gone"
+            android:inputType="number"></EditText>
+
+        <Button
+            android:id="@+id/temp_edit_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定"></Button>
+    </LinearLayout>
+</LinearLayout>

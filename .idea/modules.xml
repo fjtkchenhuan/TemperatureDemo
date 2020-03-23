@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TemperatureDemo.iml" filepath="$PROJECT_DIR$/TemperatureDemo.iml" group="TemperatureDemo" />
+      <module fileurl="file://$PROJECT_DIR$/amg88xx/amg88xx.iml" filepath="$PROJECT_DIR$/amg88xx/amg88xx.iml" group="TemperatureDemo/amg88xx" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="TemperatureDemo/app" />
+      <module fileurl="file://$PROJECT_DIR$/imlx90640/imlx90640.iml" filepath="$PROJECT_DIR$/imlx90640/imlx90640.iml" group="TemperatureDemo/imlx90640" />
+      <module fileurl="file://$PROJECT_DIR$/mlx90621/mlx90621.iml" filepath="$PROJECT_DIR$/mlx90621/mlx90621.iml" group="TemperatureDemo/mlx90621" />
+      <module fileurl="file://$PROJECT_DIR$/omron/omron.iml" filepath="$PROJECT_DIR$/omron/omron.iml" group="TemperatureDemo/omron" />
+      <module fileurl="file://$PROJECT_DIR$/serialport/serialport.iml" filepath="$PROJECT_DIR$/serialport/serialport.iml" group="TemperatureDemo/serialport" />
+      <module fileurl="file://$PROJECT_DIR$/temperaturelib/temperaturelib.iml" filepath="$PROJECT_DIR$/temperaturelib/temperaturelib.iml" group="TemperatureDemo/temperaturelib" />
+    </modules>
+  </component>
+</project>

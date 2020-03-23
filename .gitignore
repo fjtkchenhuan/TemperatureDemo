@@ -1,0 +1,9 @@
+# Project exclude paths
+/.gradle/
+/amg88xx/.cxx/
+/app/build/
+/app/build/intermediates/javac/debug/classes/
+/imlx90640/.cxx/
+/mlx90621/.cxx/
+/omron/.cxx/
+/serialport/.cxx/

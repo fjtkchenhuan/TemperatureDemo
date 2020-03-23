@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/i2c_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/measure_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@android:color/holo_purple"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="right|bottom">
+    </TextView>
+    <CheckBox
+        android:id="@+id/measure_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:checked="true"
+        android:text="背光"></CheckBox>
+
+    <Button
+        android:id="@+id/measure_take"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:text="温度补偿"></Button>
+
+
+</LinearLayout>
