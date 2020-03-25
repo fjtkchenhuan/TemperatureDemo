@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +61,17 @@ public class TemptakeDialog implements View.OnClickListener, AdapterView.OnItemC
         mDialog = null;
     }
 
+    private static float lastCustomValue = 0;
     @Override
     public void onClick(View view) {
         Editable takeT = takeEdit.getText();
         Editable distance = distanceEdit.getText();
         if (!TextUtils.isEmpty(takeT)) {
-            mDevice.getTakeTempEntity().setTakeTemperature(Float.valueOf(takeT.toString()));
+            if (lastCustomValue == 0)
+                mDevice.getTakeTempEntity().setTakeTemperature(Float.valueOf(takeT.toString()) + mDevice.getTakeTempEntity().getTakeTemperature());
+            else
+                mDevice.getTakeTempEntity().setTakeTemperature(Float.valueOf(takeT.toString()) + mDevice.getTakeTempEntity().getTakeTemperature() - lastCustomValue);
+            lastCustomValue = Float.valueOf(takeT.toString());
         }
         if (!TextUtils.isEmpty(distance)) {
             mDevice.getTakeTempEntity().setDistances(Integer.valueOf(distance.toString()));
