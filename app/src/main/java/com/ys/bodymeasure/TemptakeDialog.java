@@ -83,6 +83,7 @@ public class TemptakeDialog implements View.OnClickListener, AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         TakeTempEntity selectEntity = tempAdapter.getItem(i);
+        lastCustomValue = 0;
         mDevice.setTakeTempEntity(selectEntity);
         tempCallback.callback(selectEntity);
         dismiss();

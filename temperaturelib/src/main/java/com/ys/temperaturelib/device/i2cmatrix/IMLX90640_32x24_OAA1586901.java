@@ -10,13 +10,13 @@ import com.ys.temperaturelib.temperature.TemperatureParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IMLX90640_32x24_OAA1547511 extends IMatrixThermometer implements TemperatureParser<float[]> {
-    public static final String MODE_NAME = "MLX90640-32*24-OAA1547511(矩阵)";
+public class IMLX90640_32x24_OAA1586901 extends IMatrixThermometer implements TemperatureParser<float[]> {
+    public static final String MODE_NAME = "MLX90640-32*24-OAA1586901(矩阵)";
     static final int MATRIX_COUT_X = 32; //温度矩阵横坐标总数量
     static final int MATRIX_COUT_Y = 24; //温度矩阵横坐标总数量
     Mlx90640 mMlx90640;
 
-    public IMLX90640_32x24_OAA1547511() {
+    public IMLX90640_32x24_OAA1586901() {
         mMlx90640 = new Mlx90640();
         setParser(this);
         setParm(new MeasureParm(MODE_NAME, 50, 150, MATRIX_COUT_X, MATRIX_COUT_Y));
@@ -28,23 +28,23 @@ public class IMLX90640_32x24_OAA1547511 extends IMatrixThermometer implements Te
         TakeTempEntity[] entities = new TakeTempEntity[5];
         TakeTempEntity entity1 = new TakeTempEntity();
         entity1.setDistances(10);
-        entity1.setTakeTemperature(-0.25f);
+        entity1.setTakeTemperature(-0.2f);
         entities[0] = entity1;
         TakeTempEntity entity2 = new TakeTempEntity();
         entity2.setDistances(20);
-        entity2.setTakeTemperature(0.15f);
+        entity2.setTakeTemperature(0.1f);
         entities[1] = entity2;
         TakeTempEntity entity3 = new TakeTempEntity();
         entity3.setDistances(30);
-        entity3.setTakeTemperature(0.7f);
+        entity3.setTakeTemperature(0.5f);
         entities[2] = entity3;
         TakeTempEntity entity4 = new TakeTempEntity();
         entity4.setDistances(40);
-        entity4.setTakeTemperature(0.7f);
+        entity4.setTakeTemperature(1.7f);
         entities[3] = entity4;
         TakeTempEntity entity5 = new TakeTempEntity();
         entity5.setDistances(50);
-        entity5.setTakeTemperature(1.5f);
+        entity5.setTakeTemperature(2.55f);
         entities[4] = entity5;
         return entities;
     }
