@@ -25,6 +25,7 @@ import com.ys.temperaturelib.device.serialport.SMLX90614;
 import com.ys.temperaturelib.device.serialport.ProductImp;
 import com.ys.temperaturelib.device.SThermometer;
 import com.ys.temperaturelib.device.serialport.SMLX90621_RR;
+import com.ys.temperaturelib.device.serialport.SMLX90621_YS;
 import com.ys.temperaturelib.device.serialport.SYM32A_32x32_XM;
 import com.ys.temperaturelib.temperature.TakeTempEntity;
 
@@ -36,11 +37,11 @@ public class SerialActivity extends AppCompatActivity implements View.OnClickLis
     //所有串口模块型号
     public static final String[] MODE_SERIALPORT = new String[]{SMLX90614.DEFAULT_MODE_NAME, SGY_MCU90614_TW.DEFAULT_MODE_NAME,
             SGY_MCU90640_32x24.DEFAULT_MODE_NAME, SM23_32x32_XM.DEFAULT_MODE_NAME, SYM32A_32x32_XM.DEFAULT_MODE_NAME,
-            SHAIMAN_32x24.DEFAULT_MODE_NAME, SMLX90621_RR.DEFAULT_MODE_NAME};
+            SHAIMAN_32x24.DEFAULT_MODE_NAME, SMLX90621_RR.DEFAULT_MODE_NAME, SMLX90621_YS.DEFAULT_MODE_NAME};
 
     ProductImp[] mSerialPorts = new ProductImp[]{
             new SMLX90614(), new SGY_MCU90614_TW(), new SGY_MCU90640_32x24(), new SM23_32x32_XM(),
-            new SYM32A_32x32_XM(), new SHAIMAN_32x24(), new SMLX90621_RR(),
+            new SYM32A_32x32_XM(), new SHAIMAN_32x24(), new SMLX90621_RR(),new SMLX90621_YS()
     };
     AlertDialog mDevicesDialog;
     AlertDialog mRateDialog;
