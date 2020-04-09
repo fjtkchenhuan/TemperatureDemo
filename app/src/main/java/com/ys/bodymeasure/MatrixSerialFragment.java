@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,7 @@ public class MatrixSerialFragment extends BaseFragment implements View.OnClickLi
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 isAuto = isChecked;
                 checkOrder();
+                SM32ASendOrder();
             }
         });
         return inflate;
@@ -122,10 +124,10 @@ public class MatrixSerialFragment extends BaseFragment implements View.OnClickLi
             if (temperature != null) {
                 mTaText.setText("TA:" + fnum.format(temperature.ta) + "°");
                 mToText.setText("TO:" + fnum.format(temperature.temperatue) + "°");
-                recycleBitmap();
-                bitmap = mHeatMap.drawHeatMap(temperature, mSerialProduct.getParm().xCount,
-                        mSerialProduct.getParm().yCount);
-                mDataImageView.setImageBitmap(bitmap);
+                    recycleBitmap();
+                    bitmap = mHeatMap.drawHeatMap(temperature, mSerialProduct.getParm().xCount,
+                            mSerialProduct.getParm().yCount);
+                    mDataImageView.setImageBitmap(bitmap);
             }
             return true;
         }
@@ -135,6 +137,7 @@ public class MatrixSerialFragment extends BaseFragment implements View.OnClickLi
     public void onDestroyView() {
         super.onDestroyView();
         recycleBitmap();
+        handler.removeCallbacks(sendDate);
     }
 
     private void recycleBitmap() {
@@ -162,4 +165,25 @@ public class MatrixSerialFragment extends BaseFragment implements View.OnClickLi
         return mSerialProduct instanceof SM23_32x32_XM || mSerialProduct instanceof SHAIMAN_32x24
                 || mSerialProduct instanceof SMLX90621_RR;
     }
+
+    private Handler handler;
+    private void SM32ASendOrder() {
+        handler = new Handler();
+        if (mSerialProduct instanceof SYM32A_32x32_XM) {
+               handler.postDelayed(sendDate,500);
+        }
+    }
+
+    private Runnable sendDate = new Runnable() {
+        @Override
+        public void run() {
+            if (mSerialProduct == null) return;
+            byte[] order = mSerialProduct.getOrderDataOutputQuery();
+            onOrder(order);
+            if (mCheckBox.isChecked())
+               handler.postDelayed(sendDate,500);
+        }
+    };
+
+
 }

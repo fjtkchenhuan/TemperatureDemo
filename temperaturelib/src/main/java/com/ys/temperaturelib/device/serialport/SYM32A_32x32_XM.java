@@ -1,8 +1,14 @@
 package com.ys.temperaturelib.device.serialport;
 
+
+import android.util.Log;
+
 import com.ys.temperaturelib.temperature.MeasureParm;
+import com.ys.temperaturelib.temperature.TakeTempEntity;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
 import com.ys.temperaturelib.temperature.TemperatureParser;
+import com.ys.temperaturelib.utils.DataFormatUtil;
+import com.ys.temperaturelib.utils.ParseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +42,14 @@ public class SYM32A_32x32_XM extends ProductImp implements TemperatureParser<byt
     int index;
 
     public SYM32A_32x32_XM() {
-        super(DEFAULT_DEVICE,DEFAULT_RATE,
-                new MeasureParm(DEFAULT_MODE_NAME, 35, 150, MATRIX_COUT_X, MATRIX_COUT_Y));
+        super(DEFAULT_DEVICE, DEFAULT_RATE,
+                new MeasureParm(DEFAULT_MODE_NAME, 35, 100, MATRIX_COUT_X, MATRIX_COUT_Y));
         setTemperatureParser(this);
+        setTakeTempEntity(getDefaultTakeTempEntities()[0]);
     }
 
     public byte[][] getInitOrder() {
-        return new byte[][]{ORDER_DATA_OUTPUT_TYPE_2, ORDER_DATA_OUTPUT_FORMAT_16, ORDER_DATA_OUTPUT_AUTO_CLOSE};
+        return new byte[][]{ORDER_DATA_OUTPUT_TYPE_2, ORDER_DATA_OUTPUT_FORMAT_16};
     }
 
     @Override
@@ -57,53 +64,119 @@ public class SYM32A_32x32_XM extends ProductImp implements TemperatureParser<byt
 
     @Override
     public byte[] getOrderDataOutputType(boolean isAuto) {
-        return isAuto ? ORDER_DATA_OUTPUT_AUTO_OPEN : ORDER_DATA_OUTPUT_AUTO_CLOSE;
+        return isAuto ? ORDER_DATA_OUTPUT : ORDER_DATA_OUTPUT_AUTO_CLOSE;
     }
 
     byte[] lastData;
 
+    ParseHelper helper;
+
     @Override
     public byte[] oneFrame(byte[] data) {
-        if (lastData == null) {
-            boolean isOk = (data[0] & 0xFF) == 0x41 && (data[1] & 0xFF) == 0x42 && (data[2] & 0xFF) == 0x43
-                    && (data[3] & 0xFF) == 0x44 && (data[4] & 0xFF) == 0x45 && (data[5] & 0xFF) == 0x46;
-            if (!isOk) return null;
-            lastData = new byte[data.length];
-            System.arraycopy(data, 0, lastData, 0, data.length);
-        } else {
-            byte[] temp = new byte[lastData.length + data.length];
-            System.arraycopy(lastData, 0, temp, 0, lastData.length);
-            System.arraycopy(data, 0, temp, lastData.length, data.length);
-            if (temp.length == oneFrameData.length) {
-                lastData = null;
-                return temp;
-            } else if (temp.length > oneFrameData.length) {
-                byte[] temp1 = new byte[oneFrameData.length];
-                System.arraycopy(temp, 0, temp1, 0, oneFrameData.length);
-                lastData = new byte[temp.length - oneFrameData.length];
-                System.arraycopy(temp, oneFrameData.length, lastData, 0,
-                        temp.length - oneFrameData.length);
-                return temp1;
-            }
+        if (helper == null) {
+            helper = new ParseHelper();
+            helper.setDataLenth(2061);
+            helper.setBufferCount(3);
         }
-        return null;
+
+        return helper.parseContent(data);
+
+//        if (lastData == null) {
+//            boolean isOk = (data[0] & 0xFF) == 0x41 && (data[1] & 0xFF) == 0x42 && (data[2] & 0xFF) == 0x43
+//                    && (data[3] & 0xFF) == 0x44 && (data[4] & 0xFF) == 0x45 && (data[5] & 0xFF) == 0x46;
+//            if (!isOk) return null;
+//            lastData = new byte[data.length];
+//            System.arraycopy(data, 0, lastData, 0, data.length);
+//        } else {
+//            byte[] temp = new byte[lastData.length + data.length];
+//            System.arraycopy(lastData, 0, temp, 0, lastData.length);
+//            System.arraycopy(data, 0, temp, lastData.length, data.length);
+//            if (temp.length == oneFrameData.length) {
+//                lastData = null;
+//                return temp;
+//            } else if (temp.length > oneFrameData.length) {
+//                byte[] temp1 = new byte[oneFrameData.length];
+//                System.arraycopy(temp, 0, temp1, 0, oneFrameData.length);
+//                lastData = new byte[temp.length - oneFrameData.length];
+//                System.arraycopy(temp, oneFrameData.length, lastData, 0,
+//                        temp.length - oneFrameData.length);
+//                return temp1;
+//            }
+//        }
+//        return null;
+    }
+
+    @Override
+    public TakeTempEntity[] getDefaultTakeTempEntities() {
+        TakeTempEntity[] entities = new TakeTempEntity[1];
+        TakeTempEntity entity3 = new TakeTempEntity();
+        entity3.setDistances(-1);
+        entity3.setTakeTemperature(0f);
+        entities[0] = entity3;
+        return entities;
+    }
+
+    int count = 0;
+    List<Float> mFloats = new ArrayList<>();
+    float lastTemp = 0;
+    int tempCount = 0;
+
+    @Override
+    public float check(float value, float ta) {
+        TakeTempEntity takeTempEntity = getTakeTempEntity();
+        if (!takeTempEntity.isNeedCheck()) return value;
+        count++;
+        mFloats.add(value);
+        if (mFloats.size() == 6) {
+            tempCount = 5;
+        } else if (mFloats.size() > 6) {
+            List<Float> floats = mFloats.subList(tempCount - 3, tempCount - 3 + 5);
+            float sum = 0;
+            float max = floats.get(0);
+            float min = floats.get(0);
+
+            for (int i = 0; i < floats.size(); i++) {
+                sum += floats.get(i);
+                if (floats.get(i) > max) max = floats.get(i);
+                if (floats.get(i) < min) min = floats.get(i);
+            }
+
+            float tt = sum / 5f; //+ takeTempEntity.getTakeTemperature();
+//            if (tt >= 34f && tt < 36f) {
+//                int tt1 = (int) (tt * 100);
+//                tt = Float.parseFloat("36." + String.valueOf(tt1).substring(2, 4));
+//            } else if (tt >= 37.2f && tt <= 37.5f) {
+//                tt += 0.3f;
+//            }
+            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+            lastTemp = tt;
+            tempCount++;
+            return tt;
+        }
+        return lastTemp;
     }
 
     @Override
     public TemperatureEntity parse(byte[] data) {
+//        Log.d("sky","data = " + DataFormatUtil.bytesToHex(data));
         if (data == null) return null;
         TemperatureEntity entity = new TemperatureEntity();
         List<Float> temps = new ArrayList<>();
         entity.min = entity.max = ((data[6] & 0xFF) << 8 | (data[7] & 0xFF)) / 10.0f;
         for (int i = 5; i < data.length - 9; i = i + 2) {
             int sum = (data[i + 1] & 0xFF) << 8 | (data[i + 2] & 0xFF);
-            float temp = check(sum / 10.0f,0);
+            float temp = sum / 10.0f;//check(sum / 10.0f, 0);
             if (temp < entity.min) entity.min = temp;
             if (temp > entity.max) entity.max = temp;
             temps.add(temp);
         }
+
         entity.tempList = temps;
-        entity.temperatue = entity.max;
+        float checkTemp = check(helper.getAverageTemperature(data), 0);
+        if (checkTemp == 0)
+            entity.temperatue = helper.getAverageTemperature(data);
+        else
+            entity.temperatue = checkTemp;//check(entity.max, 0);
         return entity;
     }
 }
