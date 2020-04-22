@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ys.temperaturelib.depth.DepthImpl;
+import com.ys.temperaturelib.device.serialport.RQVK002_TW;
 import com.ys.temperaturelib.device.serialport.SGY_MCU90614_TW;
 import com.ys.temperaturelib.device.serialport.SGY_MCU90640_32x24;
 import com.ys.temperaturelib.device.serialport.SHAIMAN_32x24;
@@ -27,6 +28,7 @@ import com.ys.temperaturelib.device.SThermometer;
 import com.ys.temperaturelib.device.serialport.SMLX90621_RR;
 import com.ys.temperaturelib.device.serialport.SMLX90621_YS;
 import com.ys.temperaturelib.device.serialport.SYM32A_32x32_XM;
+import com.ys.temperaturelib.temperature.MeasureParm;
 import com.ys.temperaturelib.temperature.TakeTempEntity;
 
 /**
@@ -35,14 +37,16 @@ import com.ys.temperaturelib.temperature.TakeTempEntity;
 
 public class SerialActivity extends AppCompatActivity implements View.OnClickListener {
     //所有串口模块型号
-    public static final String[] MODE_SERIALPORT = new String[]{SMLX90614.DEFAULT_MODE_NAME, SGY_MCU90614_TW.DEFAULT_MODE_NAME,
-            SGY_MCU90640_32x24.DEFAULT_MODE_NAME, SM23_32x32_XM.DEFAULT_MODE_NAME, SYM32A_32x32_XM.DEFAULT_MODE_NAME,
-            SHAIMAN_32x24.DEFAULT_MODE_NAME, SMLX90621_RR.DEFAULT_MODE_NAME, SMLX90621_YS.DEFAULT_MODE_NAME};
+    public static final String[] MODE_SERIALPORT = new String[]{RQVK002_TW.DEFAULT_MODE_NAME,SMLX90614.DEFAULT_MODE_NAME,
+            SGY_MCU90614_TW.DEFAULT_MODE_NAME, SGY_MCU90640_32x24.DEFAULT_MODE_NAME, SM23_32x32_XM.DEFAULT_MODE_NAME,
+            SYM32A_32x32_XM.DEFAULT_MODE_NAME, SHAIMAN_32x24.DEFAULT_MODE_NAME, SMLX90621_RR.DEFAULT_MODE_NAME,
+            SMLX90621_YS.DEFAULT_MODE_NAME};
 
     ProductImp[] mSerialPorts = new ProductImp[]{
-            new SMLX90614(), new SGY_MCU90614_TW(), new SGY_MCU90640_32x24(), new SM23_32x32_XM(),
+            new RQVK002_TW(),new SMLX90614(), new SGY_MCU90614_TW(), new SGY_MCU90640_32x24(), new SM23_32x32_XM(),
             new SYM32A_32x32_XM(), new SHAIMAN_32x24(), new SMLX90621_RR(),new SMLX90621_YS()
     };
+
     AlertDialog mDevicesDialog;
     AlertDialog mRateDialog;
     Button deviceButton;
@@ -76,14 +80,14 @@ public class SerialActivity extends AppCompatActivity implements View.OnClickLis
         mTakeButton = findViewById(R.id.measure_take);
         mTakeButton.setOnClickListener(this);
         distanceText = findViewById(R.id.measure_distance);
-        mDepth = new DepthImpl(this, new DepthImpl.DepthResult() {
-            @Override
-            public void onResult(int distance) {
-                Message message = mHandler.obtainMessage(0);
-                message.arg1 = distance;
-                message.sendToTarget();
-            }
-        });
+//        mDepth = new DepthImpl(this, new DepthImpl.DepthResult() {
+//            @Override
+//            public void onResult(int distance) {
+//                Message message = mHandler.obtainMessage(0);
+//                message.arg1 = distance;
+//                message.sendToTarget();
+//            }
+//        });
         mCurProduct = mSerialPorts[index];
         setTitle(mCurProduct.getParm().mode);
         init(mCurProduct.getDevice(), mCurProduct.getBaudrate());
@@ -122,7 +126,7 @@ public class SerialActivity extends AppCompatActivity implements View.OnClickLis
         mRateDialog = null;
         if (mTemptakeDialog != null) mTemptakeDialog.distroy();
         mTemptakeDialog = null;
-        mDepth.release();
+//        mDepth.release();
     }
 
 

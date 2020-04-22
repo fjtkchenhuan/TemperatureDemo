@@ -25,21 +25,31 @@ public class IOMRON_4x4 extends IMatrixThermometer implements TemperatureParser<
 
     @Override
     public TakeTempEntity[] getDefaultTakeTempEntities() {
-        TakeTempEntity[] entities = new TakeTempEntity[3];
+        TakeTempEntity[] entities = new TakeTempEntity[5];
         TakeTempEntity entity1 = new TakeTempEntity();
         entity1.setDistances(10);
-        entity1.setTakeTemperature(2.96f);
+        entity1.setTakeTemperature(1.55f);//0.3 0.6  -0.25  0.9
         entities[0] = entity1;
 
         TakeTempEntity entity2 = new TakeTempEntity();
-        entity2.setDistances(30);
-        entity2.setTakeTemperature(5.21f);
+        entity2.setDistances(20);
+        entity2.setTakeTemperature(2.35f);//2.1 0.5  -0.95  0.7
         entities[1] = entity2;
 
         TakeTempEntity entity3 = new TakeTempEntity();
-        entity3.setDistances(50);
-        entity3.setTakeTemperature(6.48f);
+        entity3.setDistances(30);
+        entity3.setTakeTemperature(2.65f);//5  0.4  -2.75  0
         entities[2] = entity3;
+
+        TakeTempEntity entity4 = new TakeTempEntity();
+        entity4.setDistances(40);
+        entity4.setTakeTemperature(4.6f);//7.2  -0.8  -1.35  -0.45
+        entities[3] = entity4;
+
+        TakeTempEntity entity5 = new TakeTempEntity();
+        entity5.setDistances(50);
+        entity5.setTakeTemperature(4.8f);//8.7 -2.65  -0.4  -0.85
+        entities[4] = entity5;
 
         return entities;
     }

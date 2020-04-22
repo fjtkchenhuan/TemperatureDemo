@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -77,14 +78,14 @@ public class I2CActivity extends AppCompatActivity implements View.OnClickListen
         mLightButton = findViewById(R.id.measure_light);
         mLightButton.setOnCheckedChangeListener(this);
         distanceText = findViewById(R.id.measure_distance);
-        mDepth = new DepthImpl(this, new DepthImpl.DepthResult() {
-            @Override
-            public void onResult(int distance) {
-                Message message = mHandler.obtainMessage(0);
-                message.arg1 = distance;
-                message.sendToTarget();
-            }
-        });
+//        mDepth = new DepthImpl(this, new DepthImpl.DepthResult() {
+//            @Override
+//            public void onResult(int distance) {
+//                Message message = mHandler.obtainMessage(0);
+//                message.arg1 = distance;
+//                message.sendToTarget();
+//            }
+//        });
 
         mCurProduct = i2cDevices[index];
         setTitle(mCurProduct.getParm().mode);

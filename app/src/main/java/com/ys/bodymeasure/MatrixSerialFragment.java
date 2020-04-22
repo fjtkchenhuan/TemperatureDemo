@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,6 @@ public class MatrixSerialFragment extends BaseFragment implements View.OnClickLi
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mSerialProduct = ((SerialActivity) getActivity()).getCurProduct();
-        measure(mSerialProduct.getDevice(), mSerialProduct.getBaudrate());
         mDataImageView.post(new Runnable() {
             @Override
             public void run() {
@@ -78,6 +78,7 @@ public class MatrixSerialFragment extends BaseFragment implements View.OnClickLi
                         mDataImageView.getHeight(), mSerialProduct.getParm().radio);
             }
         });
+        measure(mSerialProduct.getDevice(), mSerialProduct.getBaudrate());
     }
 
     private void checkOrder() {
@@ -170,7 +171,7 @@ public class MatrixSerialFragment extends BaseFragment implements View.OnClickLi
     private void SM32ASendOrder() {
         handler = new Handler();
         if (mSerialProduct instanceof SYM32A_32x32_XM) {
-               handler.postDelayed(sendDate,500);
+               handler.postDelayed(sendDate,400);
         }
     }
 
@@ -181,7 +182,7 @@ public class MatrixSerialFragment extends BaseFragment implements View.OnClickLi
             byte[] order = mSerialProduct.getOrderDataOutputQuery();
             onOrder(order);
             if (mCheckBox.isChecked())
-               handler.postDelayed(sendDate,500);
+               handler.postDelayed(sendDate,400);
         }
     };
 

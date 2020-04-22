@@ -1,14 +1,11 @@
 package com.ys.temperaturelib.device;
 
 import android.os.SystemClock;
-import android.text.TextUtils;
-import android.util.Log;
 
 import com.ys.serialport.SerialPort;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
 import com.ys.temperaturelib.temperature.TemperatureParser;
-import com.ys.temperaturelib.utils.DataFormatUtil;
-import com.ys.temperaturelib.utils.FileUtil;
+
 
 /**
  * 串口设备
@@ -157,6 +154,7 @@ public class SThermometer extends MeasureDevice {
                 if (isInterrupted) {
                     break;
                 }
+                SystemClock.sleep(period);
             }
         }
     }
