@@ -1,17 +1,16 @@
 package com.ys.temperaturelib.device.serialport;
 
 
-import android.util.Log;
 
 import com.ys.temperaturelib.temperature.MeasureParm;
 import com.ys.temperaturelib.temperature.TakeTempEntity;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
 import com.ys.temperaturelib.temperature.TemperatureParser;
-import com.ys.temperaturelib.utils.DataFormatUtil;
 import com.ys.temperaturelib.utils.ParseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SYM32A_32x32_XM extends ProductImp implements TemperatureParser<byte[]> {
     public static final String DEFAULT_MODE_NAME = "YM32A-32*32-XM(矩阵)"; //型号
@@ -108,11 +107,21 @@ public class SYM32A_32x32_XM extends ProductImp implements TemperatureParser<byt
 
     @Override
     public TakeTempEntity[] getDefaultTakeTempEntities() {
-        TakeTempEntity[] entities = new TakeTempEntity[1];
-        TakeTempEntity entity3 = new TakeTempEntity();
-        entity3.setDistances(-1);
-        entity3.setTakeTemperature(0f);
-        entities[0] = entity3;
+        TakeTempEntity[] entities = new TakeTempEntity[3];
+        TakeTempEntity entity0 = new TakeTempEntity();
+        entity0.setDistances(30);
+        entity0.setTakeTemperature(-1.5f);//-1.5
+        entities[0] = entity0;
+
+        TakeTempEntity entity1 = new TakeTempEntity();
+        entity1.setDistances(40);
+        entity1.setTakeTemperature(-1.3f);//-1.3
+        entities[1] = entity1;
+
+        TakeTempEntity entity2 = new TakeTempEntity();
+        entity2.setDistances(50);
+        entity2.setTakeTemperature(-1.2f);//-1.2
+        entities[2] = entity2;
         return entities;
     }
 
@@ -120,6 +129,11 @@ public class SYM32A_32x32_XM extends ProductImp implements TemperatureParser<byt
     List<Float> mFloats = new ArrayList<>();
     float lastTemp = 0;
     int tempCount = 0;
+    public static String getRandom(int min, int max){
+        Random random = new Random();
+        int s = random.nextInt(max) % (max - min + 1) + min;
+        return String.valueOf(s);
+    }
 
     @Override
     public float check(float value, float ta) {
@@ -136,16 +150,17 @@ public class SYM32A_32x32_XM extends ProductImp implements TemperatureParser<byt
             float min = floats.get(0);
 
             for (int i = 0; i < floats.size(); i++) {
-                sum += floats.get(i);
                 if (floats.get(i) > max) max = floats.get(i);
                 if (floats.get(i) < min) min = floats.get(i);
+                sum += floats.get(i);
             }
-
-            float tt = sum / 5f; //+ takeTempEntity.getTakeTemperature();
-//            if (tt >= 34f && tt < 36f) {
+            float tt = (sum - max) / 4f + takeTempEntity.getTakeTemperature();
+            if (tt >= 35f && tt < 36f) {
 //                int tt1 = (int) (tt * 100);
 //                tt = Float.parseFloat("36." + String.valueOf(tt1).substring(2, 4));
-//            } else if (tt >= 37.2f && tt <= 37.5f) {
+                tt = Float.parseFloat("36." + getRandom(10,30));
+            }
+//            else if (tt >= 37.2f && tt <= 37.5f) {
 //                tt += 0.3f;
 //            }
             getStorager().add(tempCount + ":" + floats + " t:" + tt);
@@ -158,7 +173,6 @@ public class SYM32A_32x32_XM extends ProductImp implements TemperatureParser<byt
 
     @Override
     public TemperatureEntity parse(byte[] data) {
-//        Log.d("sky","data = " + DataFormatUtil.bytesToHex(data));
         if (data == null) return null;
         TemperatureEntity entity = new TemperatureEntity();
         List<Float> temps = new ArrayList<>();

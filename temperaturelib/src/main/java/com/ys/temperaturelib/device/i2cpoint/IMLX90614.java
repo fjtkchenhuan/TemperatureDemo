@@ -28,16 +28,41 @@ public class IMLX90614 extends IPointThermometer {
 
     @Override
     public TakeTempEntity[] getDefaultTakeTempEntities() {
-        TakeTempEntity[] entities = new TakeTempEntity[2];
-        TakeTempEntity entity2 = new TakeTempEntity();
-        entity2.setDistances(3);
-        entity2.setTakeTemperature(1.98f);
-        entities[0] = entity2;
+        TakeTempEntity[] entities = new TakeTempEntity[5];
+//        TakeTempEntity entity2 = new TakeTempEntity();
+//        entity2.setDistances(3);
+//        entity2.setTakeTemperature(1.98f);
+//        entities[0] = entity2;
+//
+//        TakeTempEntity entity1 = new TakeTempEntity();
+//        entity1.setDistances(30);
+//        entity1.setTakeTemperature(9.78f);
+//        entities[1] = entity1;
+
+        TakeTempEntity entity0 = new TakeTempEntity();
+        entity0.setDistances(40);
+        entity0.setTakeTemperature(1.3f); //-0.3   -0.4  -0.4
+        entities[0] = entity0;
 
         TakeTempEntity entity1 = new TakeTempEntity();
-        entity1.setDistances(30);
-        entity1.setTakeTemperature(9.78f);
+        entity1.setDistances(50);
+        entity1.setTakeTemperature(2.7f);//-0.5  -0.4  -0.4
         entities[1] = entity1;
+
+        TakeTempEntity entity2 = new TakeTempEntity();
+        entity2.setDistances(60);
+        entity2.setTakeTemperature(3.6f);//-1.1  -0.2  -1.1
+        entities[2] = entity2;
+
+        TakeTempEntity entity3 = new TakeTempEntity();
+        entity3.setDistances(70);
+        entity3.setTakeTemperature(3.9f);//-2  -0.3  -1.5
+        entities[3] = entity3;
+
+        TakeTempEntity entity4 = new TakeTempEntity();
+        entity4.setDistances(80);
+        entity4.setTakeTemperature(4.4f);//-1.9  -0.3  -2
+        entities[4] = entity4;
 
         return entities;
     }

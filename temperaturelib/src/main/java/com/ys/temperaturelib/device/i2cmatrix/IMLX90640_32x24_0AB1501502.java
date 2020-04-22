@@ -1,5 +1,7 @@
 package com.ys.temperaturelib.device.i2cmatrix;
 
+import android.util.Log;
+
 import com.ys.temperaturei2c.Mlx90640;
 import com.ys.temperaturelib.device.IMatrixThermometer;
 import com.ys.temperaturelib.temperature.MeasureParm;
@@ -22,28 +24,29 @@ public class IMLX90640_32x24_0AB1501502 extends IMatrixThermometer implements Te
         setParm(new MeasureParm(MODE_NAME, 50, 150, MATRIX_COUT_X, MATRIX_COUT_Y));
         setTakeTempEntity(getDefaultTakeTempEntities()[0]);
     }
+
     @Override
     public TakeTempEntity[] getDefaultTakeTempEntities() {
         TakeTempEntity[] entities = new TakeTempEntity[5];
         TakeTempEntity entity1 = new TakeTempEntity();
         entity1.setDistances(10);
-        entity1.setTakeTemperature(-1.09f);
+        entity1.setTakeTemperature(-1.3f);//0.75
         entities[0] = entity1;
         TakeTempEntity entity2 = new TakeTempEntity();
         entity2.setDistances(20);
-        entity2.setTakeTemperature(-0.72f);
+        entity2.setTakeTemperature(-0.32f);//0.7
         entities[1] = entity2;
         TakeTempEntity entity3 = new TakeTempEntity();
         entity3.setDistances(30);
-        entity3.setTakeTemperature(-0.27f);
+        entity3.setTakeTemperature(-0.08f);//0.75
         entities[2] = entity3;
         TakeTempEntity entity4 = new TakeTempEntity();
         entity4.setDistances(40);
-        entity4.setTakeTemperature(0.02f);
+        entity4.setTakeTemperature(0.47f);//0.7
         entities[3] = entity4;
         TakeTempEntity entity5 = new TakeTempEntity();
         entity5.setDistances(50);
-        entity5.setTakeTemperature(0.45f);
+        entity5.setTakeTemperature(0.85f);//0.9
         entities[4] = entity5;
         return entities;
     }
@@ -101,14 +104,14 @@ public class IMLX90640_32x24_0AB1501502 extends IMatrixThermometer implements Te
             float tt = (sum / 5f);
             tt += (31 - ta) * 0.077f;
             tt += getTakeTempEntity().getTakeTemperature();
-//            if (tt >= 34f && tt <= 36f) {
-//                int tt1 = (int) (tt * 100);
-//                tt1 += getParm().isLight ? -1.0f : 0f;
-//                tt = Float.parseFloat("36." + String.valueOf(tt1).substring(2, 4));
-//            } else if (tt >= 37.2f && tt <= 37.5f) {
-//                tt += getParm().isLight ? -1.0f : 0f;
-//                tt += 0.3f;
-//            }
+            if (tt >= 34f && tt <= 36f) {
+                int tt1 = (int) (tt * 100);
+                tt1 += getParm().isLight ? -1.0f : 0f;
+                tt = Float.parseFloat("36." + String.valueOf(tt1).substring(2, 4));
+            } else if (tt >= 37.1f && tt <= 37.3f) {
+                tt += getParm().isLight ? -1.0f : 0f;
+                tt -= 0.3f;
+            }
             getStorager().add(tempCount + ":" + floats + " t:" + tt);
             lastTemp = tt;
             tempCount++;

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: __local_aars__:F./2020CompanyCode/Temperature/TemperatureDemo/temperaturelib/libs/serialport.jar:unspecified@jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/temperaturelib/libs/serialport.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

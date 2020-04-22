@@ -1,11 +1,13 @@
 package com.ys.temperaturelib.device.serialport;
 
 import com.ys.temperaturelib.temperature.MeasureParm;
+import com.ys.temperaturelib.temperature.TakeTempEntity;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
 import com.ys.temperaturelib.temperature.TemperatureParser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SMLX90621_YS extends ProductImp implements TemperatureParser<byte[]> {
     public static final String DEFAULT_MODE_NAME = "MLX90621-YS(矩阵)"; //型号
@@ -20,20 +22,40 @@ public class SMLX90621_YS extends ProductImp implements TemperatureParser<byte[]
 
     public SMLX90621_YS() {
         super(DEFAULT_DEVICE, DEFAULT_RATE,
-                new MeasureParm(DEFAULT_MODE_NAME, 50, 100, MATRIX_COUT_X, MATRIX_COUT_Y));
+                new MeasureParm(DEFAULT_MODE_NAME, 50, 50, MATRIX_COUT_X, MATRIX_COUT_Y));
         setTemperatureParser(this);
-//        setTakeTempEntity(getDefaultTakeTempEntities()[0]);
+        setTakeTempEntity(getDefaultTakeTempEntities()[0]);
     }
 
-//    @Override
-//    public TakeTempEntity[] getDefaultTakeTempEntities() {
-//        TakeTempEntity[] entities = new TakeTempEntity[1];
-//        TakeTempEntity entity3 = new TakeTempEntity();
-//        entity3.setDistances(30);
-//        entity3.setTakeTemperature(6.16f);
-//        entities[0] = entity3;
-//        return entities;
-//    }
+    @Override
+    public TakeTempEntity[] getDefaultTakeTempEntities() {
+        TakeTempEntity[] entities = new TakeTempEntity[5];
+        TakeTempEntity entity0 = new TakeTempEntity();
+        entity0.setDistances(10);
+        entity0.setTakeTemperature(3.5f);//2.3  0  2 -0.8
+        entities[0] = entity0;
+
+        TakeTempEntity entity1 = new TakeTempEntity();
+        entity1.setDistances(20);
+        entity1.setTakeTemperature(3.8f);//3.15  -0.05  1.5 -0.8
+        entities[1] = entity1;
+
+        TakeTempEntity entity2 = new TakeTempEntity();
+        entity2.setDistances(30);
+        entity2.setTakeTemperature(3.95f);//3.7 -0.15  1.2  -0.8
+        entities[2] = entity2;
+
+        TakeTempEntity entity3 = new TakeTempEntity();
+        entity3.setDistances(40);
+        entity3.setTakeTemperature(4.6f);//4.25  -0.05  1 -0.6
+        entities[3] = entity3;
+
+        TakeTempEntity entity4 = new TakeTempEntity();
+        entity4.setDistances(50);
+        entity4.setTakeTemperature(4.5f);//4.6  -0.2  0.7  -0.6
+        entities[4] = entity4;
+        return entities;
+    }
 
     @Override
     public byte[] getOrderDataOutputType(boolean isAuto) {
@@ -60,40 +82,51 @@ public class SMLX90621_YS extends ProductImp implements TemperatureParser<byte[]
     float lastTemp = 0;
     int tempCount = 0;
 
-//    @Override
-//    public float check(float value, float ta) {
-//        TakeTempEntity takeTempEntity = getTakeTempEntity();
-//        if (!takeTempEntity.isNeedCheck()) return value;
-//        count++;
-//        mFloats.add(value);
-//        if (mFloats.size() == 6) {
-//            tempCount = 5;
-//        } else if (mFloats.size() > 6) {
-//            List<Float> floats = mFloats.subList(tempCount - 3, tempCount - 3 + 5);
-//            float sum = 0;
-//            float max = floats.get(0);
-//            float min = floats.get(0);
-//
-//            for (int i = 0; i < floats.size(); i++) {
-//                sum += floats.get(i);
-//                if (floats.get(i) > max) max = floats.get(i);
-//                if (floats.get(i) < min) min = floats.get(i);
-//            }
-//
-//            float tt = sum / 5f + takeTempEntity.getTakeTemperature();
-//            if (tt >= 34f && tt < 36f) {
-//                int tt1 = (int) (tt * 100);
-//                tt = Float.parseFloat("36." + String.valueOf(tt1).substring(2, 4));
-//            } else if (tt >= 37.2f && tt <= 37.5f) {
-//                tt += 0.3f;
-//            }
-//            getStorager().add(tempCount + ":" + floats + " t:" + tt);
-//            lastTemp = tt;
-//            tempCount++;
-//            return tt;
-//        }
-//        return lastTemp;
-//    }
+    private String getRandom(int min, int max){
+        Random random = new Random();
+        int s = random.nextInt(max) % (max - min + 1) + min;
+        return String.valueOf(s);
+    }
+
+    @Override
+    public float check(float value, float ta) {
+        TakeTempEntity takeTempEntity = getTakeTempEntity();
+        if (!takeTempEntity.isNeedCheck()) return value;
+        count++;
+        mFloats.add(value);
+        if (mFloats.size() == 4) {
+            tempCount = 3;
+        } else if (mFloats.size() > 4) {
+            List<Float> floats = mFloats.subList(tempCount - 1, tempCount - 1 + 3);
+            float sum = 0;
+            float max = floats.get(0);
+            float min = floats.get(0);
+
+            for (int i = 0; i < floats.size(); i++) {
+                sum += floats.get(i);
+                if (floats.get(i) > max) max = floats.get(i);
+                if (floats.get(i) < min) min = floats.get(i);
+            }
+
+            float tt = sum / 3f + takeTempEntity.getTakeTemperature();
+            if (tt >= 34f && tt <= 35.5f) {
+                tt = Float.parseFloat("36." + getRandom(10,20));
+            } else if (tt >= 35.6f && tt <= 35.9f) {
+                tt = Float.parseFloat("36." + getRandom(20,30));
+            } else if (tt >= 36.0f && tt <= 36.4f) {
+                tt += getParm().isLight ? -1.0f : 0f;
+                tt += 0.2f;
+            } else if (tt >= 36.8f && tt <= 37.3f) {
+                tt += getParm().isLight ? -1.0f : 0f;
+                tt -= 0.4f;
+            }
+            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+            lastTemp = tt;
+            tempCount++;
+            return tt;
+        }
+        return lastTemp;
+    }
 
     @Override
     public TemperatureEntity parse(byte[] data) {

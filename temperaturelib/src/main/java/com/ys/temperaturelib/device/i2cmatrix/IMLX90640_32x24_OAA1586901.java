@@ -28,23 +28,23 @@ public class IMLX90640_32x24_OAA1586901 extends IMatrixThermometer implements Te
         TakeTempEntity[] entities = new TakeTempEntity[5];
         TakeTempEntity entity1 = new TakeTempEntity();
         entity1.setDistances(10);
-        entity1.setTakeTemperature(-0.2f);
+        entity1.setTakeTemperature(0.9f);//-0.2 -0.25  1.25  0.1
         entities[0] = entity1;
         TakeTempEntity entity2 = new TakeTempEntity();
         entity2.setDistances(20);
-        entity2.setTakeTemperature(0.1f);
+        entity2.setTakeTemperature(0.95f);//0.1 -0.15  1.35  -0.35
         entities[1] = entity2;
         TakeTempEntity entity3 = new TakeTempEntity();
         entity3.setDistances(30);
-        entity3.setTakeTemperature(0.5f);
+        entity3.setTakeTemperature(1.45f);//0.5 -0.1  1.1  -0.05
         entities[2] = entity3;
         TakeTempEntity entity4 = new TakeTempEntity();
         entity4.setDistances(40);
-        entity4.setTakeTemperature(1.7f);
+        entity4.setTakeTemperature(1.85f);//1.7  -1.1  1.25  0
         entities[3] = entity4;
         TakeTempEntity entity5 = new TakeTempEntity();
         entity5.setDistances(50);
-        entity5.setTakeTemperature(2.55f);
+        entity5.setTakeTemperature(2.0f);//2.55 -1.3  0.85  -0.1
         entities[4] = entity5;
         return entities;
     }
