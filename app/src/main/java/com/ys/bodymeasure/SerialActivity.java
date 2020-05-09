@@ -17,10 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ys.temperaturelib.depth.DepthImpl;
+import com.ys.temperaturelib.device.serialport.CHUWO_32x32;
 import com.ys.temperaturelib.device.serialport.RQVK002_TW;
 import com.ys.temperaturelib.device.serialport.SGY_MCU90614_TW;
 import com.ys.temperaturelib.device.serialport.SGY_MCU90640_32x24;
 import com.ys.temperaturelib.device.serialport.SHAIMAN_32x24;
+import com.ys.temperaturelib.device.serialport.SLSC_HM_32x32;
 import com.ys.temperaturelib.device.serialport.SM23_32x32_XM;
 import com.ys.temperaturelib.device.serialport.SMLX90614;
 import com.ys.temperaturelib.device.serialport.ProductImp;
@@ -37,14 +39,14 @@ import com.ys.temperaturelib.temperature.TakeTempEntity;
 
 public class SerialActivity extends AppCompatActivity implements View.OnClickListener {
     //所有串口模块型号
-    public static final String[] MODE_SERIALPORT = new String[]{RQVK002_TW.DEFAULT_MODE_NAME,SMLX90614.DEFAULT_MODE_NAME,
+    public static final String[] MODE_SERIALPORT = new String[]{SLSC_HM_32x32.DEFAULT_MODE_NAME,RQVK002_TW.DEFAULT_MODE_NAME,SMLX90614.DEFAULT_MODE_NAME,
             SGY_MCU90614_TW.DEFAULT_MODE_NAME, SGY_MCU90640_32x24.DEFAULT_MODE_NAME, SM23_32x32_XM.DEFAULT_MODE_NAME,
             SYM32A_32x32_XM.DEFAULT_MODE_NAME, SHAIMAN_32x24.DEFAULT_MODE_NAME, SMLX90621_RR.DEFAULT_MODE_NAME,
-            SMLX90621_YS.DEFAULT_MODE_NAME};
+            SMLX90621_YS.DEFAULT_MODE_NAME, CHUWO_32x32.DEFAULT_MODE_NAME};
 
     ProductImp[] mSerialPorts = new ProductImp[]{
-            new RQVK002_TW(),new SMLX90614(), new SGY_MCU90614_TW(), new SGY_MCU90640_32x24(), new SM23_32x32_XM(),
-            new SYM32A_32x32_XM(), new SHAIMAN_32x24(), new SMLX90621_RR(),new SMLX90621_YS()
+            new SLSC_HM_32x32(),new RQVK002_TW(),new SMLX90614(), new SGY_MCU90614_TW(), new SGY_MCU90640_32x24(), new SM23_32x32_XM(),
+            new SYM32A_32x32_XM(), new SHAIMAN_32x24(), new SMLX90621_RR(),new SMLX90621_YS(),new CHUWO_32x32()
     };
 
     AlertDialog mDevicesDialog;

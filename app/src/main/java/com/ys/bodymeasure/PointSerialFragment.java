@@ -3,6 +3,7 @@ package com.ys.bodymeasure;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,16 @@ import androidx.annotation.Nullable;
 
 import com.ys.temperaturelib.device.MeasureResult;
 import com.ys.temperaturelib.device.serialport.ProductImp;
+import com.ys.temperaturelib.device.serialport.SLSC_HM_32x32;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
+import com.ys.temperaturelib.utils.DataFormatUtil;
 
 import java.text.DecimalFormat;
 
 public class PointSerialFragment extends BaseFragment {
     TextView measureText;
     ProductImp mSerialProduct;
+    private Handler handler;
 
     @Nullable
     @Override
@@ -34,7 +38,22 @@ public class PointSerialFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mSerialProduct = ((SerialActivity) getActivity()).getCurProduct();
         measure(mSerialProduct.getDevice(), mSerialProduct.getBaudrate());
+        if (mSerialProduct instanceof SLSC_HM_32x32) {
+            handler = new Handler();
+            handler.post(sendData);
+        }
     }
+
+    private Runnable sendData = new Runnable() {
+        @Override
+        public void run() {
+            if (mSerialProduct != null) {
+                byte[] order = mSerialProduct.getOrderDataOutputQuery();
+                mSerialProduct.order(order);
+                handler.postDelayed(sendData,500);
+            }
+        }
+    };
 
     @Override
     public void measure(String devicePath, int deviceRate) {
@@ -61,4 +80,10 @@ public class PointSerialFragment extends BaseFragment {
             return false;
         }
     });
+
+    @Override
+    public void onDestroy() {
+        handler.removeCallbacks(sendData);
+        super.onDestroy();
+    }
 }
