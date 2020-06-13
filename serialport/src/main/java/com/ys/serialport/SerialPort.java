@@ -1,6 +1,8 @@
 package com.ys.serialport;
 
 
+import android.os.SystemClock;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -75,7 +77,7 @@ public class SerialPort {
         if (mFileInputStream == null) return null;
         try {
             if (mFileInputStream.available() > 0) {
-//                SystemClock.sleep(sleepms);
+                SystemClock.sleep(sleepms);
                 if (mFileInputStream == null) return null;
                 byte[] buffer = new byte[mFileInputStream.available()];
                 mFileInputStream.read(buffer);

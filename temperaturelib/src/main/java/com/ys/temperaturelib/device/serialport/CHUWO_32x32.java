@@ -3,12 +3,13 @@ package com.ys.temperaturelib.device.serialport;
 import com.ys.temperaturelib.temperature.MeasureParm;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
 import com.ys.temperaturelib.temperature.TemperatureParser;
+import com.ys.temperaturelib.utils.DataFormatUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CHUWO_32x32 extends ProductImp implements TemperatureParser<byte[]> {
-    public static final String DEFAULT_MODE_NAME = "触沃32*32(矩阵)"; //型号
+    public static final String DEFAULT_MODE_NAME = "HTPA32×32-dR2L2.1(矩阵)"; //型号
     static final String DEFAULT_DEVICE = "/dev/ttyS3"; //设备号
     static final int DEFAULT_RATE = 115200; //波特率
 
@@ -75,8 +76,9 @@ public class CHUWO_32x32 extends ProductImp implements TemperatureParser<byte[]>
             if (temp > entity.max) entity.max = temp;
             temps.add(temp);
         }
+        getStorager().add(" List=" + temps + "\n");
         entity.tempList = temps;
-        entity.temperatue = temp;
+        entity.temperatue = entity.max;
         return entity;
     }
 }

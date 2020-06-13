@@ -1,5 +1,7 @@
 package com.ys.temperaturelib.device.serialport;
 
+import android.util.Log;
+
 import com.ys.temperaturelib.temperature.MeasureParm;
 import com.ys.temperaturelib.temperature.TakeTempEntity;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
@@ -82,7 +84,7 @@ public class SMLX90621_YS extends ProductImp implements TemperatureParser<byte[]
     float lastTemp = 0;
     int tempCount = 0;
 
-    private String getRandom(int min, int max){
+    private String getRandom(int min, int max) {
         Random random = new Random();
         int s = random.nextInt(max) % (max - min + 1) + min;
         return String.valueOf(s);
@@ -109,18 +111,31 @@ public class SMLX90621_YS extends ProductImp implements TemperatureParser<byte[]
             }
 
             float tt = sum / 3f + takeTempEntity.getTakeTemperature();
+            float tt1 = sum / 3f;
+            if (ta < 10) {
+                tt1 += 3.5f;
+                tt += 3.5f;
+            } else if (ta >= 10 && ta < 20) {
+                tt1 += 1f;
+                tt += 1f;
+            }
+
             if (tt >= 34f && tt <= 35.5f) {
-                tt = Float.parseFloat("36." + getRandom(10,20));
-            } else if (tt >= 35.6f && tt <= 35.9f) {
-                tt = Float.parseFloat("36." + getRandom(20,30));
-            } else if (tt >= 36.0f && tt <= 36.4f) {
+                tt = Float.parseFloat("36." + getRandom(10, 20));
+            } else if (tt > 35.5f && tt <= 35.9f) {
+                tt = Float.parseFloat("36." + getRandom(20, 30));
+            } else if (tt > 35.9f && tt <= 36.4f) {
                 tt += getParm().isLight ? -1.0f : 0f;
                 tt += 0.2f;
             } else if (tt >= 36.8f && tt <= 37.3f) {
                 tt += getParm().isLight ? -1.0f : 0f;
                 tt -= 0.4f;
             }
-            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+            getStorager().add("平均值：" + getString(sum / 3f) +
+                    ", 平均值+距离补偿:" + getString(sum / 3f + takeTempEntity.getTakeTemperature()) +
+                    ", 平均值+ta补偿:" + getString(tt1) +
+                    ", to：" + getString(tt) + ", ta:" + getString(ta));
+//            getStorager().add(tempCount + ":" + floats + " t:" + tt);
             lastTemp = tt;
             tempCount++;
             return tt;
@@ -128,25 +143,35 @@ public class SMLX90621_YS extends ProductImp implements TemperatureParser<byte[]
         return lastTemp;
     }
 
+    private String getString(float value) {
+        if ((value + "").length() < 6)
+            return value + "";
+        else
+            return (value + "").substring(0, 5);
+    }
+
     @Override
     public TemperatureEntity parse(byte[] data) {
         if (data == null) return null;
-        if ((data[0] & 0xFF) == 0xa5 && (data[1] & 0xFF) == 0x06
-                && (data[data.length - 1] & 0xFF) == 0xBF) {
-            TemperatureEntity entity = new TemperatureEntity();
-            List<Float> temps = new ArrayList<>();
-            entity.min = entity.max = (((data[3] & 0xFF) << 8 | (data[4] & 0xFF))) / 100.0f;
-            entity.ta = ((data[data.length - 5] & 0xFF) << 8 | (data[data.length - 4] & 0xFF)) / 100.0f;
-            for (int i = 3; i < data.length - 5; i = i + 2) {
-                int sum = (data[i] & 0xFF) << 8 | (data[i + 1] & 0xFF);
-                float temp = sum / 100f;
-                if (temp < entity.min) entity.min = temp;
-                if (temp > entity.max) entity.max = temp;
-                temps.add(temp);
+        if (data.length > 7) {
+            if ((data[0] & 0xFF) == 0xa5 && (data[1] & 0xFF) == 0x06
+                    && (data[data.length - 1] & 0xFF) == 0xBF) {
+                TemperatureEntity entity = new TemperatureEntity();
+                List<Float> temps = new ArrayList<>();
+                entity.min = entity.max = (((data[3] & 0xFF) << 8 | (data[4] & 0xFF))) / 100.0f;
+                entity.ta = ((data[data.length - 5] & 0xFF) << 8 | (data[data.length - 4] & 0xFF)) / 100.0f;
+                for (int i = 3; i < data.length - 5; i = i + 2) {
+                    int sum = (data[i] & 0xFF) << 8 | (data[i + 1] & 0xFF);
+                    float temp = sum / 100f;
+                    if (temp < entity.min) entity.min = temp;
+                    if (temp > entity.max) entity.max = temp;
+                    temps.add(temp);
+                }
+//                getStorager().add(" List=" + temps + "\n");
+                entity.tempList = temps;
+                entity.temperatue = check(entity.max, entity.ta);
+                return entity;
             }
-            entity.tempList = temps;
-            entity.temperatue = check(entity.max, entity.ta);
-            return entity;
         }
         return null;
     }

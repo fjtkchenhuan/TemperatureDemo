@@ -1,5 +1,7 @@
 package com.ys.temperaturelib.device.i2cmatrix;
 
+import android.util.Log;
+
 import com.ys.mlx90621.Mlx90621;
 import com.ys.temperaturelib.device.IMatrixThermometer;
 import com.ys.temperaturelib.temperature.MeasureParm;
@@ -8,6 +10,7 @@ import com.ys.temperaturelib.temperature.TemperatureEntity;
 import com.ys.temperaturelib.temperature.TemperatureParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -86,7 +89,7 @@ public class IMLX90621_16x4_YS extends IMatrixThermometer implements Temperature
     float lastTemp = 0;
     int tempCount = 0;
 
-    private String getRandom(int min, int max){
+    private String getRandom(int min, int max) {
         Random random = new Random();
         int s = random.nextInt(max) % (max - min + 1) + min;
         return String.valueOf(s);
@@ -112,15 +115,19 @@ public class IMLX90621_16x4_YS extends IMatrixThermometer implements Temperature
                 if (floats.get(i) < min) min = floats.get(i);
             }
             float tt = (sum / 5f) + takeTempEntity.getTakeTemperature();
-            if (ta < 10)
+            float tt1 = sum / 5f;
+            if (ta < 10) {
                 tt += 3.5f;
-            else if (ta >=10 && ta < 20)
+                tt1 += 3.5f;
+            } else if (ta >= 10 && ta < 20) {
                 tt += 1f;
+                tt1 += 1f;
+            }
 
             if (tt >= 34f && tt <= 35.5f) {
-                tt = Float.parseFloat("36." + getRandom(10,20));
+                tt = Float.parseFloat("36." + getRandom(10, 30));
             } else if (tt > 35.5f && tt <= 35.9f) {
-                tt = Float.parseFloat("36." + getRandom(20,30));
+                tt = Float.parseFloat("36." + getRandom(30, 60));
             } else if (tt > 35.9f && tt <= 36.4f) {
                 tt += getParm().isLight ? -1.0f : 0f;
                 tt += 0.2f;
@@ -128,12 +135,23 @@ public class IMLX90621_16x4_YS extends IMatrixThermometer implements Temperature
                 tt += getParm().isLight ? -1.0f : 0f;
                 tt -= 0.4f;
             }
-            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+//            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+            getStorager().add("平均值:" + getString(sum / 5f)  +
+                    ", 平均值+距离补偿:" + getString(sum / 5f + takeTempEntity.getTakeTemperature()) +
+                    ", 平均值+ta补偿:" + getString(tt1) +
+                    ", to：" + getString(tt) + ", ta:" + getString(ta));
             lastTemp = tt;
             tempCount++;
             return tt;
         }
         return lastTemp;
+    }
+
+    private String getString(float value) {
+        if ((value+"").length() < 6)
+            return value+"";
+        else
+            return (value+"").substring(0,5);
     }
 
     @Override
@@ -165,6 +183,7 @@ public class IMLX90621_16x4_YS extends IMatrixThermometer implements Temperature
                 if (temp > entity.max) entity.max = temp;
                 temps.add(temp);
             }
+//            getStorager().add(" List=" + temps + "\n");
             entity.tempList = temps;
             entity.temperatue = check(entity.max, entity.ta);
             return entity;

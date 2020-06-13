@@ -1,10 +1,14 @@
 package com.ys.temperaturelib.device;
 
 import android.os.SystemClock;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.ys.serialport.SerialPort;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
 import com.ys.temperaturelib.temperature.TemperatureParser;
+import com.ys.temperaturelib.utils.DataFormatUtil;
+import com.ys.temperaturelib.utils.FileUtil;
 
 
 /**
@@ -18,10 +22,10 @@ public class SThermometer extends MeasureDevice {
     public static String[] DEVICES = new String[]{"dev/ttyS0","dev/ttyS1","dev/ttyS2","dev/ttyS3",
             "dev/ttyS4","dev/ttyGS0","dev/ttyGS1","dev/ttyGS2","dev/ttyGS3","dev/ttyFIQ0"};
     public static String[] getDevices() {
-//        String result = FileUtil.exec("find /dev/ -name \"tty*\"");
-//        if (TextUtils.isEmpty(result)) return null;
-//        return result.split(" ");
-        return DEVICES;
+        String result = FileUtil.exec("find /dev/ -name \"tty*\"");
+        if (TextUtils.isEmpty(result)) return null;
+        return result.split(" ");
+//        return DEVICES;
     }
 
     SerialPort mSerialPort;
@@ -81,6 +85,7 @@ public class SThermometer extends MeasureDevice {
 
     @Override
     public void order(byte[] data) {
+        Log.d("sky","send data = " + DataFormatUtil.bytesToHex(data));
         if (mEnabled && mSerialPort != null) {
             mSerialPort.write(data);
         }
@@ -142,6 +147,7 @@ public class SThermometer extends MeasureDevice {
                         SystemClock.sleep(20);
                     }
                     byte[] read = mSerialPort.read(period);
+//                    Log.d("sky","data11 = " + DataFormatUtil.bytesToHex(read));
                     if (!isInterrupted && read != null && mParser != null) {
                         byte[] oneFrame = mParser.oneFrame(read);
                         if (oneFrame != null) {
@@ -154,7 +160,7 @@ public class SThermometer extends MeasureDevice {
                 if (isInterrupted) {
                     break;
                 }
-                SystemClock.sleep(period);
+//                SystemClock.sleep(period);
             }
         }
     }
