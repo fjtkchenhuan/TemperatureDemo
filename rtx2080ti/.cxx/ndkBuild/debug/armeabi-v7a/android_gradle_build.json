@@ -1,0 +1,37 @@
+{
+  "buildFiles": [
+    "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk APP_ABI\u003darmeabi-v7a NDK_ALL_ABIS\u003darmeabi-v7a NDK_DEBUG\u003d1 APP_PLATFORM\u003dandroid-19 NDK_OUT\u003dF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/debug/obj NDK_LIBS_OUT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\debug\\lib clean"
+  ],
+  "buildTargetsCommand": "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk APP_ABI\u003darmeabi-v7a NDK_ALL_ABIS\u003darmeabi-v7a NDK_DEBUG\u003d1 APP_PLATFORM\u003dandroid-19 NDK_OUT\u003dF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/debug/obj NDK_LIBS_OUT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\debug\\lib {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "rtx2080ti-debug-armeabi-v7a": {
+      "buildCommand": "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk APP_ABI\u003darmeabi-v7a NDK_ALL_ABIS\u003darmeabi-v7a NDK_DEBUG\u003d1 APP_PLATFORM\u003dandroid-19 NDK_OUT\u003dF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/debug/obj NDK_LIBS_OUT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\debug\\lib F:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/debug/obj/local/armeabi-v7a/librtx2080ti.so",
+      "toolchain": "toolchain-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "artifactName": "rtx2080ti",
+      "files": [
+        {
+          "src": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\rtx2080tiMainFunc.c",
+          "flags": "-target armv7-none-linux-androideabi19 -fdata-sections -ffunction-sections -fstack-protector-strong -funwind-tables -no-canonical-prefixes --sysroot C:/Users/Administrator.DESKTOP-9BD4MS9/Android/Sdk/ndk/20.0.5594570/build//../toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -Wno-invalid-command-line-argument -Wno-unused-command-line-argument -fno-addrsig -fpic -march\u003darmv7-a -mthumb -O0 -UNDEBUG -fno-limit-debug-info -IF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/src/main/jni -DANDROID -Wa,--noexecstack -Wformat -Werror\u003dformat-security"
+        },
+        {
+          "src": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\rtx2080ti_jni.c",
+          "flags": "-target armv7-none-linux-androideabi19 -fdata-sections -ffunction-sections -fstack-protector-strong -funwind-tables -no-canonical-prefixes --sysroot C:/Users/Administrator.DESKTOP-9BD4MS9/Android/Sdk/ndk/20.0.5594570/build//../toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -Wno-invalid-command-line-argument -Wno-unused-command-line-argument -fno-addrsig -fpic -march\u003darmv7-a -mthumb -O0 -UNDEBUG -fno-limit-debug-info -IF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/src/main/jni -DANDROID -Wa,--noexecstack -Wformat -Werror\u003dformat-security"
+        }
+      ],
+      "output": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\armeabi-v7a\\librtx2080ti.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-armeabi-v7a": {
+      "cCompilerExecutable": "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

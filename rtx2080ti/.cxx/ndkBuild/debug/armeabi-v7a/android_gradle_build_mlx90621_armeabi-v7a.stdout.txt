@@ -1,0 +1,3 @@
+[armeabi-v7a] Compile thumb  : mlx90621 <= rtx2080tiMainFunc.c
+[armeabi-v7a] Compile thumb  : mlx90621 <= rtx2080ti.c
+[armeabi-v7a] SharedLibrary  : libmlx90621.so

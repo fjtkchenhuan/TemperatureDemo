@@ -1,0 +1,3 @@
+[arm64-v8a] Compile        : mlx90621 <= rtx2080tiMainFunc.c
+[arm64-v8a] Compile        : mlx90621 <= rtx2080ti.c
+[arm64-v8a] SharedLibrary  : libmlx90621.so

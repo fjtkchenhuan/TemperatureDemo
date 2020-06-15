@@ -1,0 +1,20 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 19 min SDK version: x86_64",
+    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
+    "tag": "debug|x86_64"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON \u0027F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\.cxx\\ndkBuild\\debug\\x86_64\\android_gradle_build.json\u0027 was up-to-date",
+    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
+    "tag": "debug|x86_64"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON generation completed without problems",
+    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
+    "tag": "debug|x86_64"
+  }
+]

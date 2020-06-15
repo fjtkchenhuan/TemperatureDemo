@@ -1,0 +1,10 @@
+1、解压apk，将各个模块需要的so库放置到TemperatureDemo\temperaturelib\libs\armeabi目录下
+2、各个模块可以编译生成jar包，放在temperaturelib\libs下
+3、temperaturelib的build.gradle下依赖jar包
+//    implementation files('libs/amg88xx.jar')
+//    implementation files('libs/imlx90640.jar')
+//    implementation files('libs/mlx90621.jar')
+//    implementation files('libs/omron.jar')
+//    implementation files('libs/serialport.jar')
+4、编译temperaturelib生成arr包
+5、app调用arr包，做法API文档里有描述

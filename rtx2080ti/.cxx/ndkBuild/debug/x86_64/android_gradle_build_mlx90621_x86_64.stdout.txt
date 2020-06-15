@@ -1,0 +1,3 @@
+[x86_64] Compile        : mlx90621 <= rtx2080tiMainFunc.c
+[x86_64] Compile        : mlx90621 <= rtx2080ti.c
+[x86_64] SharedLibrary  : libmlx90621.so

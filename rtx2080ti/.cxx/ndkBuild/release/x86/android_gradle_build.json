@@ -1,0 +1,37 @@
+{
+  "buildFiles": [
+    "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-19 NDK_OUT\u003dF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\release\\lib clean"
+  ],
+  "buildTargetsCommand": "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-19 NDK_OUT\u003dF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\release\\lib {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "rtx2080ti-release-x86": {
+      "buildCommand": "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk APP_ABI\u003dx86 NDK_ALL_ABIS\u003dx86 NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-19 NDK_OUT\u003dF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\release\\lib F:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/release/obj/local/x86/librtx2080ti.so",
+      "toolchain": "toolchain-x86",
+      "abi": "x86",
+      "artifactName": "rtx2080ti",
+      "files": [
+        {
+          "src": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\rtx2080tiMainFunc.c",
+          "flags": "-target i686-none-linux-android19 -fdata-sections -ffunction-sections -fstack-protector-strong -funwind-tables -no-canonical-prefixes --sysroot C:/Users/Administrator.DESKTOP-9BD4MS9/Android/Sdk/ndk/20.0.5594570/build//../toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -Wno-invalid-command-line-argument -Wno-unused-command-line-argument -fno-addrsig -fPIC -O2 -DNDEBUG -IF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/src/main/jni -DANDROID -Wa,--noexecstack -Wformat -Werror\u003dformat-security -mstackrealign"
+        },
+        {
+          "src": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\rtx2080ti_jni.c",
+          "flags": "-target i686-none-linux-android19 -fdata-sections -ffunction-sections -fstack-protector-strong -funwind-tables -no-canonical-prefixes --sysroot C:/Users/Administrator.DESKTOP-9BD4MS9/Android/Sdk/ndk/20.0.5594570/build//../toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -Wno-invalid-command-line-argument -Wno-unused-command-line-argument -fno-addrsig -fPIC -O2 -DNDEBUG -IF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/src/main/jni -DANDROID -Wa,--noexecstack -Wformat -Werror\u003dformat-security -mstackrealign"
+        }
+      ],
+      "output": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\release\\obj\\local\\x86\\librtx2080ti.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-x86": {
+      "cCompilerExecutable": "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

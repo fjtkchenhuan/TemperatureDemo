@@ -1,0 +1,37 @@
+{
+  "ndkFolder": "C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570",
+  "messages": [
+    {
+      "level": "INFO",
+      "message": "android.ndkVersion from module build.gradle is 20.0.5594570"
+    },
+    {
+      "level": "INFO",
+      "message": "ndk.dir in local.properties is C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570"
+    },
+    {
+      "level": "INFO",
+      "message": "ANDROID_NDK_HOME environment variable is not set"
+    },
+    {
+      "level": "INFO",
+      "message": "sdkFolder is C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570 by ndk.dir"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk-bundle in SDK ndk-bundle folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Considering C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570 in SDK ndk folder"
+    },
+    {
+      "level": "INFO",
+      "message": "Choosing C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570 from ndk.dir which had the requested version 20.0.5594570"
+    }
+  ]
+}

@@ -39,6 +39,7 @@ dependencies {
     implementation project(path: ':mlx90621')
     implementation project(path: ':amg88xx')
     implementation project(path: ':omron')
+    implementation project(path: ':rtx2080ti')
 //    implementation files('libs/amg88xx.jar')
 //    implementation files('libs/imlx90640.jar')
 //    implementation files('libs/mlx90621.jar')
