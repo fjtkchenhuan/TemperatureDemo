@@ -26,6 +26,7 @@ import com.ys.temperaturelib.device.i2cmatrix.IMLX90640_32x24_0AB1501502;
 import com.ys.temperaturelib.device.i2cmatrix.IMLX90640_32x24_0AB1543001;
 import com.ys.temperaturelib.device.i2cmatrix.IMLX90640_32x24_OAA1547511;
 import com.ys.temperaturelib.device.i2cmatrix.IMLX90640_32x24_OAA1586901;
+import com.ys.temperaturelib.device.i2cmatrix.IMLX90641_16x12;
 import com.ys.temperaturelib.device.i2cmatrix.IOMRON_32x32;
 import com.ys.temperaturelib.device.i2cmatrix.IOMROND6T_8L_8x1_HG;
 import com.ys.temperaturelib.device.i2cmatrix.IOMRON_4x4;
@@ -42,14 +43,18 @@ import com.ys.temperaturelib.temperature.TakeTempEntity;
 public class I2CActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     //所有i2c接口模块型号
+//    public static final String[] MODE_I2C = new String[]{
+//            IMLX90640_32x24_0AB1501502.MODE_NAME};
+//    MeasureDevice[] i2cDevices = new MeasureDevice[]{
+//            new IMLX90640_32x24_0AB1501502()};
     public static final String[] MODE_I2C = new String[]{IHM_TSEV01CL55_HLDL.MODE_NAME, IMLX90614.MODE_NAME,
             IMLX90640_32x24_0AB1543001.MODE_NAME,IMLX90640_32x24_0AB1501502.MODE_NAME, IMLX90640_32x24_0AB1435407.MODE_NAME,
             IMLX90640_32x24_OAA1547511.MODE_NAME, IMLX90640_32x24_OAA1586901.MODE_NAME,IMLX90621_16x4_YS.MODE_NAME, IAMG88XX_8x8_WZHY.MODE_NAME,
-            IOMROND6T_8L_8x1_HG.MODE_NAME, IOMRON_4x4.MODE_NAME, IOMRON_32x32.MODE_NAME, IRTX2080TI_16x16.MODE_NAME};
+            IOMROND6T_8L_8x1_HG.MODE_NAME, IOMRON_4x4.MODE_NAME, IOMRON_32x32.MODE_NAME, IRTX2080TI_16x16.MODE_NAME, IMLX90641_16x12.MODE_NAME};
     MeasureDevice[] i2cDevices = new MeasureDevice[]{new IHM_TSEV01CL55_HLDL(), new IMLX90614(),
             new IMLX90640_32x24_0AB1543001(), new IMLX90640_32x24_0AB1501502(), new IMLX90640_32x24_0AB1435407(),
             new IMLX90640_32x24_OAA1547511(), new IMLX90640_32x24_OAA1586901(),new IMLX90621_16x4_YS(), new IAMG88XX_8x8_WZHY(),
-            new IOMROND6T_8L_8x1_HG(), new IOMRON_4x4(), new IOMRON_32x32(),new IRTX2080TI_16x16()};
+            new IOMROND6T_8L_8x1_HG(), new IOMRON_4x4(), new IOMRON_32x32(),new IRTX2080TI_16x16(),new IMLX90641_16x12()};
     private Button mTakeButton;
     private CheckBox mLightButton;
     private TextView distanceText;
@@ -112,7 +117,7 @@ public class I2CActivity extends AppCompatActivity implements View.OnClickListen
         mCurProduct = null;
         if (mTemptakeDialog != null) mTemptakeDialog.distroy();
         mTemptakeDialog = null;
-        mDepth.release();
+//        mDepth.release();
     }
 
     @Override

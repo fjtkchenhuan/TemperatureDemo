@@ -76,7 +76,7 @@ public class CHUWO_32x32 extends ProductImp implements TemperatureParser<byte[]>
             if (temp > entity.max) entity.max = temp;
             temps.add(temp);
         }
-        getStorager().add(" List=" + temps + "\n");
+//        getStorager().add(" List=" + temps + "\n");
         entity.tempList = temps;
         entity.temperatue = entity.max;
         return entity;

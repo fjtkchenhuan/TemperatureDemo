@@ -88,7 +88,7 @@ public class SMLX90621_RR extends ProductImp implements TemperatureParser<byte[]
             } else if (tt >= 37.2f && tt <= 37.5f) {
                 tt += 0.3f;
             }
-            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+//            getStorager().add(tempCount + ":" + floats + " t:" + tt);
             lastTemp = tt;
             tempCount++;
             return tt;

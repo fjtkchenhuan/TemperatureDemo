@@ -11,6 +11,7 @@ public class TemperatureEntity implements Parcelable {
     public float min;
     public float ta;
     public float temperatue;
+    public String sb;
 
     public TemperatureEntity(){}
     protected TemperatureEntity(Parcel in) {
@@ -18,6 +19,7 @@ public class TemperatureEntity implements Parcelable {
         min = in.readFloat();
         ta = in.readFloat();
         temperatue = in.readFloat();
+        sb = in.readString();
     }
 
     public static final Creator<TemperatureEntity> CREATOR = new Creator<TemperatureEntity>() {
@@ -43,5 +45,6 @@ public class TemperatureEntity implements Parcelable {
         parcel.writeFloat(min);
         parcel.writeFloat(ta);
         parcel.writeFloat(temperatue);
+        parcel.writeString(sb);
     }
 }

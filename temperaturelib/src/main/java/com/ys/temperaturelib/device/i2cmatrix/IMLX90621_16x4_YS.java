@@ -95,6 +95,7 @@ public class IMLX90621_16x4_YS extends IMatrixThermometer implements Temperature
         return String.valueOf(s);
     }
 
+
     @Override
     public float check(float value, float ta) {
         TakeTempEntity takeTempEntity = getTakeTempEntity();
@@ -135,11 +136,13 @@ public class IMLX90621_16x4_YS extends IMatrixThermometer implements Temperature
                 tt += getParm().isLight ? -1.0f : 0f;
                 tt -= 0.4f;
             }
-//            getStorager().add(tempCount + ":" + floats + " t:" + tt);
-            getStorager().add("平均值:" + getString(sum / 5f)  +
-                    ", 平均值+距离补偿:" + getString(sum / 5f + takeTempEntity.getTakeTemperature()) +
-                    ", 平均值+ta补偿:" + getString(tt1) +
-                    ", to：" + getString(tt) + ", ta:" + getString(ta));
+//            if (getStorager() != null) {
+////            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+//                getStorager().add("平均值:" + getString(sum / 5f) +
+//                        ", 平均值+距离补偿:" + getString(sum / 5f + takeTempEntity.getTakeTemperature()) +
+//                        ", 平均值+ta补偿:" + getString(tt1) +
+//                        ", to：" + getString(tt) + ", ta:" + getString(ta));
+//            }
             lastTemp = tt;
             tempCount++;
             return tt;

@@ -7,67 +7,7 @@
   },
   {
     "level": "INFO",
-    "message": "rebuilding JSON F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\.cxx\\ndkBuild\\release\\arm64-v8a\\android_gradle_build.json due to:",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "- expected json F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\.cxx\\ndkBuild\\release\\arm64-v8a\\android_gradle_build.json file is not present, will remove stale json folder",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "- missing previous command file F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\.cxx\\ndkBuild\\release\\arm64-v8a\\build_command.txt, will remove stale json folder",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "- command changed from previous, will remove stale json folder",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "created folder \u0027F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\.cxx\\ndkBuild\\release\\arm64-v8a\u0027",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "executing ndkBuild Executable : C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\ndk-build.cmd\narguments : \nNDK_PROJECT_PATH\u003dnull\nAPP_BUILD_SCRIPT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk\nAPP_ABI\u003darm64-v8a\nNDK_ALL_ABIS\u003darm64-v8a\nNDK_DEBUG\u003d0\nAPP_PLATFORM\u003dandroid-19\nNDK_OUT\u003dF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/release/obj\nNDK_LIBS_OUT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\release\\lib\nAPP_SHORT_COMMANDS\u003dfalse\nLOCAL_SHORT_COMMANDS\u003dfalse\n-B\n-n\njvmArgs : \n\n",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "Executable : C:\\Users\\Administrator.DESKTOP-9BD4MS9\\Android\\Sdk\\ndk\\20.0.5594570\\ndk-build.cmd\narguments : \nNDK_PROJECT_PATH\u003dnull\nAPP_BUILD_SCRIPT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk\nAPP_ABI\u003darm64-v8a\nNDK_ALL_ABIS\u003darm64-v8a\nNDK_DEBUG\u003d0\nAPP_PLATFORM\u003dandroid-19\nNDK_OUT\u003dF:/2020CompanyCode/Temperature/TemperatureDemo/rtx2080ti/build/intermediates/ndkBuild/release/obj\nNDK_LIBS_OUT\u003dF:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\build\\intermediates\\ndkBuild\\release\\lib\nAPP_SHORT_COMMANDS\u003dfalse\nLOCAL_SHORT_COMMANDS\u003dfalse\n-B\n-n\njvmArgs : \n\n",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "done executing ndkBuild",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "write build output F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\.cxx\\ndkBuild\\release\\arm64-v8a\\build_output.txt",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "parse and convert ndk-build output to build configuration JSON",
-    "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
-    "tag": "release|arm64-v8a"
-  },
-  {
-    "level": "INFO",
-    "message": "write command file F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\.cxx\\ndkBuild\\release\\arm64-v8a\\build_command.txt",
+    "message": "JSON \u0027F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\.cxx\\ndkBuild\\release\\arm64-v8a\\android_gradle_build.json\u0027 was up-to-date",
     "file": "F:\\2020CompanyCode\\Temperature\\TemperatureDemo\\rtx2080ti\\src\\main\\jni\\Android.mk",
     "tag": "release|arm64-v8a"
   },

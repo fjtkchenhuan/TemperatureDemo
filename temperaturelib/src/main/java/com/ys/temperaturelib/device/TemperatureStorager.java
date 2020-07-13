@@ -43,7 +43,9 @@ public class TemperatureStorager implements Runnable {
 
     @Override
     public void run() {
-        FileUtil.writeFileAppend(fileName, new String("\n\n\n"));
+//        FileUtil.writeFileAppend(fileName, new String("\n\n"));
+        FileUtil.writeFileAppend(fileName, new String("\n\n" + "==============================================分割线======" +
+                "========================================"+"\n\n"));
         while (isWorked) {
             TemperatureEntity entity = mQueue.poll();
             String poll = mQueue1.poll();
@@ -53,8 +55,8 @@ public class TemperatureStorager implements Runnable {
                 mBuffer.append(":");
 //                mBuffer.append(" MIN=" + fnum.format(entity.min));
 //                mBuffer.append(" MAX=" + fnum.format(entity.max));
-                mBuffer.append("TA1=" + fnum.format(entity.ta));
-                mBuffer.append("TO1=" + fnum.format(entity.temperatue));
+//                mBuffer.append("TA1=" + fnum.format(entity.ta));
+//                mBuffer.append("TO1=" + fnum.format(entity.temperatue));
                 mBuffer.append("\n");
                 if(entity.tempList != null && entity.tempList.size() >= 6){
 //                    mBuffer.append(" List=" + entity.tempList.subList(0, 6));

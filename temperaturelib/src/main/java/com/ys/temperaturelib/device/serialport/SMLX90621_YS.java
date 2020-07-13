@@ -34,27 +34,27 @@ public class SMLX90621_YS extends ProductImp implements TemperatureParser<byte[]
         TakeTempEntity[] entities = new TakeTempEntity[5];
         TakeTempEntity entity0 = new TakeTempEntity();
         entity0.setDistances(10);
-        entity0.setTakeTemperature(3.5f);//2.3  0  2 -0.8
+        entity0.setTakeTemperature(3.25f);//2.3  0  2 -0.8  -0.25
         entities[0] = entity0;
 
         TakeTempEntity entity1 = new TakeTempEntity();
         entity1.setDistances(20);
-        entity1.setTakeTemperature(3.8f);//3.15  -0.05  1.5 -0.8
+        entity1.setTakeTemperature(4.95f);//3.15  -0.05  1.5 -0.8  1.15
         entities[1] = entity1;
 
         TakeTempEntity entity2 = new TakeTempEntity();
         entity2.setDistances(30);
-        entity2.setTakeTemperature(3.95f);//3.7 -0.15  1.2  -0.8
+        entity2.setTakeTemperature(4.25f);//3.7 -0.15  1.2  -0.8  0.3
         entities[2] = entity2;
 
         TakeTempEntity entity3 = new TakeTempEntity();
         entity3.setDistances(40);
-        entity3.setTakeTemperature(4.6f);//4.25  -0.05  1 -0.6
+        entity3.setTakeTemperature(4.7f);//4.25  -0.05  1 -0.6  0.1
         entities[3] = entity3;
 
         TakeTempEntity entity4 = new TakeTempEntity();
         entity4.setDistances(50);
-        entity4.setTakeTemperature(4.5f);//4.6  -0.2  0.7  -0.6
+        entity4.setTakeTemperature(3.9f);//4.6  -0.2  0.7  -0.6  -0.6
         entities[4] = entity4;
         return entities;
     }
@@ -131,10 +131,10 @@ public class SMLX90621_YS extends ProductImp implements TemperatureParser<byte[]
                 tt += getParm().isLight ? -1.0f : 0f;
                 tt -= 0.4f;
             }
-            getStorager().add("平均值：" + getString(sum / 3f) +
-                    ", 平均值+距离补偿:" + getString(sum / 3f + takeTempEntity.getTakeTemperature()) +
-                    ", 平均值+ta补偿:" + getString(tt1) +
-                    ", to：" + getString(tt) + ", ta:" + getString(ta));
+//            getStorager().add("平均值：" + getString(sum / 3f) +
+//                    ", 平均值+距离补偿:" + getString(sum / 3f + takeTempEntity.getTakeTemperature()) +
+//                    ", 平均值+ta补偿:" + getString(tt1) +
+//                    ", to：" + getString(tt) + ", ta:" + getString(ta));
 //            getStorager().add(tempCount + ":" + floats + " t:" + tt);
             lastTemp = tt;
             tempCount++;

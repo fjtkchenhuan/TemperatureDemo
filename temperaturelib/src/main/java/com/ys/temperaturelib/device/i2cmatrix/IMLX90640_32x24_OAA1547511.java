@@ -110,7 +110,7 @@ public class IMLX90640_32x24_OAA1547511 extends IMatrixThermometer implements Te
 //                tt += getParm().isLight ? -1.0f : 0f;
 //                tt += 0.3f;
 //            }
-            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+//            getStorager().add(tempCount + ":" + floats + " t:" + tt);
             lastTemp = tt;
             tempCount++;
             return tt;

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 
 import com.ys.temperaturelib.device.IMatrixThermometer;
 import com.ys.temperaturelib.device.MeasureResult;
+import com.ys.temperaturelib.device.i2cmatrix.IMLX90641_16x12;
 import com.ys.temperaturelib.heatmap.DefaultHeatMap;
 import com.ys.temperaturelib.temperature.MeasureParm;
 import com.ys.temperaturelib.temperature.TemperatureEntity;
@@ -26,6 +28,7 @@ import java.util.List;
 public class MatrixI2CFragment extends BaseFragment {
     private TextView mTaText;
     private TextView mToText;
+    private TextView mDataText;
     private ImageView mDataImageView;
     private DefaultHeatMap mHeatMap;
     private IMatrixThermometer mThermometer;
@@ -37,6 +40,8 @@ public class MatrixI2CFragment extends BaseFragment {
         mDataImageView = inflate.findViewById(R.id.measure_data_img);
         mTaText = inflate.findViewById(R.id.measure_data_ta);
         mToText = inflate.findViewById(R.id.measure_data_to);
+        mDataText = inflate.findViewById(R.id.measure_data_text);
+        mDataText.setMovementMethod(ScrollingMovementMethod.getInstance());
         return inflate;
     }
 
@@ -44,6 +49,10 @@ public class MatrixI2CFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mThermometer = (IMatrixThermometer) ((I2CActivity) getActivity()).getCurProduct();
+        if (mThermometer instanceof IMLX90641_16x12)
+            mDataImageView.setVisibility(View.GONE);
+        else
+            mDataText.setVisibility(View.GONE);
         mDataImageView.post(new Runnable() {
             @Override
             public void run() {
@@ -74,11 +83,14 @@ public class MatrixI2CFragment extends BaseFragment {
 
                 mToText.setText("TO:" + fnum.format(temperature.temperatue) + "°");
                 mTaText.setText("TA:" + fnum.format(temperature.ta) + "°");
-                Bitmap bitmap = mHeatMap.drawHeatMap(temperature
-                        , mThermometer.getParm().xCount
-                        , mThermometer.getParm().yCount);
-                if (bitmap != null)
-                    mDataImageView.setImageBitmap(bitmap);
+                mDataText.setText(temperature.sb);
+                if (!(mThermometer instanceof IMLX90641_16x12)) {
+                    Bitmap bitmap = mHeatMap.drawHeatMap(temperature
+                            , mThermometer.getParm().xCount
+                            , mThermometer.getParm().yCount);
+                    if (bitmap != null)
+                        mDataImageView.setImageBitmap(bitmap);
+                }
             }
             return true;
         }

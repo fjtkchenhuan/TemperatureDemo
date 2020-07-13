@@ -163,7 +163,8 @@ public class SYM32A_32x32_XM extends ProductImp implements TemperatureParser<byt
 //            else if (tt >= 37.2f && tt <= 37.5f) {
 //                tt += 0.3f;
 //            }
-            getStorager().add(tempCount + ":" + floats + " t:" + tt);
+            if (getStorager() != null)
+//                getStorager().add(tempCount + ":" + floats + " t:" + tt);
             lastTemp = tt;
             tempCount++;
             return tt;
